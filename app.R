@@ -11,7 +11,9 @@ load_package('shiny'); library(shiny)
 load_package('pairsD3'); library(pairsD3)
 load_package('parcoords'); library(parcoords)
 load_package('githubinstall'); library(githubinstall)
-if('parcoords' %in% rownames(installed.packages()) == FALSE) {devtools::install_github("timelyportfolio/parcoords")}
+
+options(unzip = 'internal')
+devtools::install_github("timelyportfolio/parcoords")
 library(parcoords)
 
 fb <- read.csv('dataset_Facebook.csv', sep = ";",header=T)
@@ -48,13 +50,14 @@ if (interactive()) {
           tabPanel("Scatterplot Matrix", 
                        h1("Scatter Matrix of Facebook dataset"),
                        selectInput("group", "Color by", c("Type", "Category", "Weekday", "Paid")),
-                       pairsD3Output("distPlot", width = "900px",height="900px")
+                       pairsD3Output("distPlot", width = "900px",height="450px")
           ),
+          
           tabPanel("Parallel Coordinates", 
                    h1("Parallel Coordinates of Facebook dataset"),
                    h4("Click near the bottom of each column to reset selection"),
                    selectInput("groupPar", "Color by", c("Type", "Category", "Weekday", "Paid")),
-                   parcoordsOutput("parcoords", width = "900px", height = "900px" ))
+                   parcoordsOutput("parcoords", width = "900px", height = "450px" ))
         )
       )
     )
@@ -87,7 +90,7 @@ if (interactive()) {
     })
     
     output$distPlot <- renderPairsD3({
-      pairsD3(fb[,input$SelecetedVars],group=fb[[input$group]])
+      pairsD3(fb[,input$SelecetedVars],group=fb[[input$group]], width = "900px")
     })
     
     output$parcoords = renderParcoords({
