@@ -10,8 +10,8 @@ load_package('d3heatmap'); library(d3heatmap)
 load_package('shiny'); library(shiny)
 load_package('pairsD3'); library(pairsD3)
 load_package('parcoords'); library(parcoords)
-# load_package('githubinstall'); library(githubinstall)
-# if('parcoords' %in% rownames(installed.packages()) == FALSE) {devtools::install_github("timelyportfolio/parcoords")}
+load_package('githubinstall'); library(githubinstall)
+if('parcoords' %in% rownames(installed.packages()) == FALSE) {devtools::install_github("timelyportfolio/parcoords")}
 library(parcoords)
 
 fb <- read.csv('dataset_Facebook.csv', sep = ";",header=T)
@@ -111,4 +111,3 @@ if (interactive()) {
   shinyApp(ui, server)
 }
 
-shiny::runGitHub("evelynpeng-hw3", "usfviz")
