@@ -1,6 +1,6 @@
 rm(list=ls())
 cat("\014")
-setwd('/Users/evelyn/Documents/2017Spring/MSAN622/assignment3')
+#setwd('/Users/evelyn/Documents/2017Spring/MSAN622/assignment3')
 
 load_package <- function(package_name){
   if(package_name %in% rownames(installed.packages()) == FALSE) {install.packages(package_name)}
