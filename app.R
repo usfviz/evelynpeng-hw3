@@ -9,7 +9,7 @@ load_package <- function(package_name){
 load_package('d3heatmap'); library(d3heatmap)
 load_package('shiny'); library(shiny)
 load_package('pairsD3'); library(pairsD3)
-load_package('parcoords'); library(parcoords)
+#load_package('parcoords'); library(parcoords)
 load_package('githubinstall'); library(githubinstall)
 
 options(unzip = 'internal')
