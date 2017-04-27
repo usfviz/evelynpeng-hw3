@@ -1,6 +1,6 @@
 rm(list=ls())
 cat("\014")
-# setwd('/Users/evelyn/Documents/2017Spring/MSAN622/assignment3')
+setwd('/Users/evelyn/Documents/2017Spring/MSAN622/assignment3')
 
 load_package <- function(package_name){
   if(package_name %in% rownames(installed.packages()) == FALSE) {install.packages(package_name)}
@@ -26,7 +26,14 @@ if (interactive()) {
   options(device.ask.default = FALSE)
   
   ui <- fluidPage(
-    titlePanel("MSAN 622 Facebook Dataset"),
+    tags$style("
+              body {
+    -moz-transform: scale(0.65, 0.65); /* Moz-browsers */
+    zoom: 0.65; /* Other non-webkit browsers */
+    zoom: 65%; /* Webkit browsers */
+}
+              "),
+    # titlePanel("MSAN 622 Facebook Dataset"),
     sidebarLayout(
       sidebarPanel(
         checkboxGroupInput("SelecetedVars", "Select four factors from below:",
@@ -36,7 +43,7 @@ if (interactive()) {
       mainPanel(
         tabsetPanel(
           tabPanel("Heat Map", 
-                       h1("Heat Map of Facebook dataset"),
+                       h3("Heat Map of Facebook dataset"),
                        selectInput("palette", "Palette", c("YlOrRd", "RdYlBu", "Greens", "Blues")),
                        checkboxInput("cluster", "Apply clustering"),
                        d3heatmapOutput("heatmap"),
@@ -48,16 +55,17 @@ if (interactive()) {
           ),
     
           tabPanel("Scatterplot Matrix", 
-                       h1("Scatter Matrix of Facebook dataset"),
+                       h3("Scatter Matrix of Facebook dataset"),
+                       h4("Select range of data to highlight."),
                        selectInput("group", "Color by", c("Type", "Category", "Weekday", "Paid")),
-                       pairsD3Output("distPlot", width = "900px",height="450px")
+                       pairsD3Output("distPlot", width = "900px",height="800px")
           ),
           
           tabPanel("Parallel Coordinates", 
-                   h1("Parallel Coordinates of Facebook dataset"),
-                   h4("Click near the bottom of each column to reset selection"),
+                   h3("Parallel Coordinates of Facebook dataset"),
+                   h4("Select range of line to highlight. Click near the bottom of each column to reset selection"),
                    selectInput("groupPar", "Color by", c("Type", "Category", "Weekday", "Paid")),
-                   parcoordsOutput("parcoords", width = "900px", height = "450px" ))
+                   parcoordsOutput("parcoords", width = "900px", height = "800px" ))
         )
       )
     )
